@@ -3,6 +3,7 @@ import time
 from bitboard import BitBoard, BitGameState
 from board import Move
 from mcts import MCTS
+import json
 
 
 def piece_at(board, column, row):
@@ -64,6 +65,9 @@ def play_game(mode):
     state = BitGameState(BitBoard(), player_to_move="X")
     ia_mcts_x = MCTS(iterations=1000)
     ia_mcts_o = MCTS(iterations=1000)
+    with open('arvore_id3.json', 'r') as f:
+        arvore_id3 = json.load(f)
+    print("AI ID3 loaded")
 
     while True:
         print_board(state)
