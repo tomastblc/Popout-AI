@@ -1,7 +1,5 @@
-import random
-import math
 from dataclasses import dataclass
-from copy import deepcopy
+from collections import Counter
 
 @dataclass(frozen=True)
 class Move:
@@ -151,12 +149,28 @@ class Board:
         return moves
 
 class GameState:
-    def __init__(self, board, player_to_move='X', last_move = None, states = None):
+    class _StateCountView:
+        def __init__(self, counts):
+            self._counts = counts
+
+        def count(self, key):
+            return self._counts.get(key, 0)
+
+    def __init__(self, board, player_to_move='X', last_move = None, states = None, state_counts = None):
         self.board = board
         self.board_key = board.key(player_to_move)
         self.player_to_move = player_to_move
         self.last_move = last_move
-        self.states = states if states is not None else [] # when creating a new state, add +1 to the board state count by its key
+        if state_counts is not None:
+            self.state_counts = dict(state_counts)
+        elif isinstance(states, dict):
+            self.state_counts = dict(states)
+        elif states is None:
+            self.state_counts = {}
+        else:
+            self.state_counts = dict(Counter(states))
+
+        self.states = self._StateCountView(self.state_counts)
 
     def is_drawn(self):
         return self.last_move is not None and self.last_move.kind == "draw"
@@ -164,8 +178,11 @@ class GameState:
     def is_terminal(self):
         return self.get_winner() is not None or self.is_drawn()
 
+    def repetition_count(self):
+        return self.state_counts.get(self.board_key, 0)
+
     def draw_legal(self):
-        if self.board.is_full() or self.states.count(self.board_key) >= 3:
+        if self.board.is_full() or self.repetition_count() >= 3:
             return True
         return False
 
@@ -179,11 +196,24 @@ class GameState:
         return moves
 
     def apply_move(self, move):
+        next_state_counts = self.state_counts.copy()
+        next_state_counts[self.board_key] = next_state_counts.get(self.board_key, 0) + 1
+
         if move.kind == "draw":
-            return GameState(self.board, self.player_to_move, move, self.states + [self.board_key])
+            return GameState(
+                self.board,
+                self.player_to_move,
+                move,
+                state_counts=next_state_counts,
+            )
         new_board = self.board.apply_move(move, self.player_to_move)
         next_player = 'O' if self.player_to_move == 'X' else 'X'
-        return GameState(new_board, next_player, move, self.states + [self.board_key])
+        return GameState(
+            new_board,
+            next_player,
+            move,
+            state_counts=next_state_counts,
+        )
 
     def get_winner(self):
         win_x = self.board.is_win('X')

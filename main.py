@@ -1,6 +1,18 @@
-from board import Board, GameState, Move
-from mcts import MCTS
 import time
+
+from bitboard import BitBoard, BitGameState
+from board import Move
+from mcts import MCTS
+
+
+def piece_at(board, column, row):
+    if hasattr(board, "piece_at"):
+        return board.piece_at(column, row)
+
+    pieces = board.columns[column].pieces
+    if row < len(pieces):
+        return pieces[-1 - row]
+    return None
 
 
 def print_board(state):
@@ -10,9 +22,10 @@ def print_board(state):
 
     grid = [["-" for _ in range(7)] for _ in range(6)]
     for c in range(7):
-        pieces = state.board.columns[c].pieces
-        for r in range(len(pieces)):
-            grid[5 - r][c] = pieces[-(r + 1)]
+        for r in range(6):
+            piece = piece_at(state.board, c, r)
+            if piece is not None:
+                grid[5 - r][c] = piece
 
     for row in grid:
         print(" ".join(row))
@@ -48,7 +61,7 @@ def get_human_move(state):
 
 
 def play_game(mode):
-    state = GameState(Board(), player_to_move="X")
+    state = BitGameState(BitBoard(), player_to_move="X")
     ia_mcts_x = MCTS(iterations=1000)
     ia_mcts_o = MCTS(iterations=1000)
 
