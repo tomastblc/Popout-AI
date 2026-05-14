@@ -68,5 +68,5 @@ def guardar_csv(dados, nome_ficheiro="popout_dataset.csv"):
     print(f"Dataset guardado com sucesso em '{nome_ficheiro}' com {len(dados)} linhas!")
 
 if __name__ == "__main__":
-    dataset = gerar_jogos(num_jogos=10, iteracoes_mcts=200)
+    dataset = gerar_jogos(num_jogos=750, iteracoes_mcts=200)
     guardar_csv(dataset)
