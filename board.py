@@ -100,6 +100,35 @@ class Board:
         return new_brd
 
     def is_win(self, player):
+        grid = {}
+        for c in range(self.COLUMNS):
+            pecas = list(reversed(self.columns[c].pieces))
+            for r in range(Column.ROWS):
+                if r < len(pecas):
+                    grid[(c, r)] = pecas[r]
+                else:
+                    grid[(c, r)] = None
+        directions = [
+            (1, 0),   
+            (0, 1),   
+            (1, 1),   
+            (1, -1)   
+        ]
+        for c in range(self.COLUMNS):
+            for r in range(Column.ROWS):
+                if grid[(c, r)] != player:
+                    continue  
+                for dc, dr in directions:
+                    counter = 1
+                    for i in range(1, 4):
+                        nc = c + dc * i
+                        nr = r + dr * i
+                        if 0 <= nc < self.COLUMNS and 0 <= nr < Column.ROWS and grid.get((nc, nr)) == player:
+                            counter += 1
+                        else:
+                            break    
+                    if counter == 4:
+                        return True          
         return False
     
     def possible_move_dict(self, player):
@@ -147,85 +176,14 @@ class GameState:
         next_player = 'O' if self.player_to_move == 'X' else 'X'
         return GameState(new_board, next_player, move, self.states + [self.board_key])
 
+    def get_winner(self):
+        win_x = self.board.is_win('X')
+        win_o = self.board.is_win('O')
+        if win_x and win_o:
+            if self.last_move and self.last_move.kind == "pop":
+                return 'O' if self.player_to_move == 'X' else 'X'
+        if win_x: return 'X'
+        if win_o: return 'O'
+        return None
 
-class MCTSNode:
-    def __init__(self, state: GameState, parent=None, move=None, player_to_move='X'):
-        self.state = state
-        self.parent = parent
-        self.move = move
 
-        self.children = []
-        self.visits = 0
-        self.wins = 0.0
-
-        self.untried_moves = self._all_moves()
-    
-    def is_terminal(self):
-        return self.state.draw_legal()
-    
-    def is_fully_expanded(self):
-        return len(self.untried_moves) == 0
-    
-    def expand(self):
-        move = self.untried_moves.pop(0)
-        new_state = self.state.apply_move(move)
-
-        child = MCTSNode(new_state, self, move, self.state.player_to_move)
-        self.children.append(child)
-        return child
-    
-    def best_child(self, c=1.41):
-        for child in self.children:
-            if child.visits == 0:
-                return child
-        
-        def ucb1(child):
-            exploit = child.wins / child.visits
-            explore = c * math.sqrt(math.log(self.visits)/child.visits)
-            return exploit + explore
-        
-        return max(self.children, key=ucb1)
-
-    def rollout(self):
-        state = deepcopy(self.state)
-        player = state.player_to_move
-
-        while not state.draw_legal():
-            winner = state.winner()
-            if winner:
-                return winner
-            moves = state.legal_moves()
-            if not moves:
-                return None
-            move = random.choice(moves)
-            state = state.aplly_move(move)
-            player = 'O' if player == 'X' else 'X'
-        return state.winner()
-    
-    def backpropagate(self, winner):
-        self.visits += 1
-        if self.player_to_move is not None:
-            if winner is None:
-                self.wins += 0.5
-            elif winner == self.player_to_move:
-                self.wins += 1.0
-        if self.parent:
-            self.parent.backpropagate(winner)
-    
-    def mcts_search(root_state, iterations=1000):
-        root = MCTSNode(root_state, player=None)
-
-        for _ in range(iterations):
-            node = root
-
-            while not node.is_terminal() and node.is_fully_expanded():
-                node = node.best_child()
-
-            if not node.is_terminal() and not node.is_fully_expanded():
-                node = node.expand()
-            
-            winner = node.rollout()
-            node.backpropagate(winner)
-
-        best = max(root.children, key=lambda c: c.visits)
-        return best.move
