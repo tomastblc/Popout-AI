@@ -22,7 +22,7 @@ class MCTSNode:
         self.untried_moves = self.state.legal_moves()
     
     def is_terminal(self):
-        return (self.state.get_winner() is not None or self.state.draw_legal())
+        return self.state.is_terminal()
     
     def is_fully_expanded(self):
         return len(self.untried_moves) == 0
@@ -51,7 +51,7 @@ class MCTSNode:
         while True:
             winner = state.get_winner()
             if winner: return winner
-            if state.draw_legal(): 
+            if state.is_drawn():
                 return None 
             
             moves = state.legal_moves()

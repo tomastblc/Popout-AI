@@ -151,12 +151,18 @@ class Board:
         return moves
 
 class GameState:
-    def __init__(self, board, player_to_move='X', last_move = None, states = []):
+    def __init__(self, board, player_to_move='X', last_move = None, states = None):
         self.board = board
         self.board_key = board.key(player_to_move)
         self.player_to_move = player_to_move
         self.last_move = last_move
-        self.states = states # when creating a new state, add +1 to the board state count by its key
+        self.states = states if states is not None else [] # when creating a new state, add +1 to the board state count by its key
+
+    def is_drawn(self):
+        return self.last_move is not None and self.last_move.kind == "draw"
+
+    def is_terminal(self):
+        return self.get_winner() is not None or self.is_drawn()
 
     def draw_legal(self):
         if self.board.is_full() or self.states.count(self.board_key) >= 3:
@@ -164,6 +170,9 @@ class GameState:
         return False
 
     def legal_moves(self):
+        if self.is_terminal():
+            return []
+
         moves = self.board.possible_moves(self.player_to_move)
         if self.draw_legal():
             moves.append(Move("draw", None))
