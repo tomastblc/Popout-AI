@@ -30,12 +30,12 @@ def gerar_jogos(num_jogos=10, iteracoes_mcts=100):
         estado = GameState(Board(), player_to_move='X')
         
         
-        while not (estado.draw_legal() or estado.board.is_win('X') or estado.board.is_win('O')):
+        while not estado.is_terminal():
             
             melhor_jogada = ia.search(estado)
             
             
-            if melhor_jogada is None or melhor_jogada.kind == "draw":
+            if melhor_jogada is None:
                 break
                 
             
