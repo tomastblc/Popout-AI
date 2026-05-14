@@ -62,18 +62,55 @@ def treinar_id3(dados, atributos, atributo_alvo):
     return arvore
 
 
+def _valor_chave_arvore_id3(valor):
+    """
+    Árvores guardadas em JSON só têm chaves string; bool/int tornam-se
+    'true'/'false' e '0', '1', ... — alinhar com state_to_dict em runtime.
+    """
+    if isinstance(valor, bool):
+        return "true" if valor else "false"
+    if isinstance(valor, int):
+        return str(valor)
+    if isinstance(valor, float) and valor == int(valor):
+        return str(int(valor))
+    return valor
+
+
 def classificar(arvore, exemplo):
     if not isinstance(arvore, dict):
         return arvore
 
     atributo_raiz = list(arvore.keys())[0]
-    valor_exemplo = exemplo.get(atributo_raiz)
-    sub_arvore = arvore[atributo_raiz].get(valor_exemplo)
+    raw = exemplo.get(atributo_raiz)
+    norm = _valor_chave_arvore_id3(raw)
+    ramos = arvore[atributo_raiz]
+    sub_arvore = ramos.get(norm)
+    if sub_arvore is None:
+        sub_arvore = ramos.get(raw)
 
     if sub_arvore is None:
         return "Desconhecido"
 
     return classificar(sub_arvore, exemplo)
+
+
+def move_from_classe_jogada(label):
+    """Converte a classe do dataset (ex.: drop_3, pop_0, draw_None) num Move."""
+    from board import Move
+
+    if not label or label == "Desconhecido" or not isinstance(label, str):
+        return None
+    if label.startswith("draw"):
+        return Move("draw", None)
+    parts = label.split("_", 1)
+    if len(parts) != 2:
+        return None
+    kind, col_s = parts
+    try:
+        col = int(col_s)
+    except ValueError:
+        return None
+    return Move(kind, col)
 
 
 def preparar_dados_popout(caminho_csv):
@@ -90,7 +127,7 @@ def construir_exemplo_estado(state):
 
 
 if __name__ == "__main__":
-    ficheiro_dataset = "popout_dataset.csv"
+    ficheiro_dataset = "popout_dataset_v4.csv"
     print(f"A preparar os dados do ficheiro '{ficheiro_dataset}'...")
 
     dados_treino = preparar_dados_popout(ficheiro_dataset)
@@ -104,7 +141,7 @@ if __name__ == "__main__":
         print("\nA treinar a Arvore de Decisao ID3...")
         arvore_gerada = treinar_id3(dados_treino, atributos, alvo)
 
-        with open('arvore_id3_v2.json', 'w') as f:
+        with open('arvore_id3_v5.json', 'w') as f:
             json.dump(arvore_gerada, f, indent=4)
             
         print("\n=== ARVORE DE DECISAO GERADA ===")
