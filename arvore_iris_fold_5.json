@@ -1,0 +1,39 @@
+{
+    "petallength": {
+        "petallength_bin_1": {
+            "sepalwidth": {
+                "sepalwidth_bin_2": "Iris-setosa",
+                "sepalwidth_bin_3": "Iris-setosa",
+                "sepalwidth_bin_1": "Iris-versicolor",
+                "sepalwidth_bin_0": "Iris-versicolor"
+            }
+        },
+        "petallength_bin_0": "Iris-setosa",
+        "petallength_bin_3": "Iris-virginica",
+        "petallength_bin_2": {
+            "petalwidth": {
+                "petalwidth_bin_3": "Iris-virginica",
+                "petalwidth_bin_1": "Iris-versicolor",
+                "petalwidth_bin_2": {
+                    "sepalwidth": {
+                        "sepalwidth_bin_2": "Iris-versicolor",
+                        "sepalwidth_bin_3": "Iris-versicolor",
+                        "sepalwidth_bin_1": {
+                            "sepallength": {
+                                "sepallength_bin_3": "Iris-versicolor",
+                                "sepallength_bin_2": "Iris-versicolor"
+                            }
+                        },
+                        "sepalwidth_bin_0": {
+                            "sepallength": {
+                                "sepallength_bin_0": "Iris-virginica",
+                                "sepallength_bin_3": "Iris-versicolor",
+                                "sepallength_bin_2": "Iris-virginica"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

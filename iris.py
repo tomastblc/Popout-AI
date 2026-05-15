@@ -1,3 +1,4 @@
+import json
 import random
 from collections import defaultdict
 
@@ -11,6 +12,7 @@ ID_COLUMN = "ID"
 NUM_BINS = 4
 NUM_FOLDS = 5
 RANDOM_SEED = 42
+TREE_FILE_TEMPLATE = "arvore_iris_fold_{fold}.json"
 
 
 def carregar_iris(caminho_csv):
@@ -129,12 +131,18 @@ def cross_validate_iris(caminho_csv="iris.csv", k=NUM_FOLDS, num_bins=NUM_BINS, 
 
         train_df, test_df, _ = discretizar_fold(train_df, test_df, feature_cols, num_bins)
         resultado = avaliar_fold(train_df, test_df, TARGET_COLUMN)
+
+        tree_path = TREE_FILE_TEMPLATE.format(fold=fold_idx)
+        with open(tree_path, "w", encoding="utf-8") as f:
+            json.dump(resultado["tree"], f, indent=4)
+        resultado["tree_path"] = tree_path
         resultados.append(resultado)
 
         print(
             f"Fold {fold_idx}/{k}: "
             f"accuracy={resultado['accuracy']:.3f}, "
-            f"unknown_rate={resultado['unknown_rate']:.3f}"
+            f"unknown_rate={resultado['unknown_rate']:.3f}, "
+            f"tree={tree_path}"
         )
 
     media_accuracy = sum(r["accuracy"] for r in resultados) / len(resultados)
