@@ -127,7 +127,7 @@ def construir_exemplo_estado(state):
 
 
 if __name__ == "__main__":
-    ficheiro_dataset = "popout_dataset_v4.csv"
+    ficheiro_dataset = "tour_adv_1.csv"
     print(f"A preparar os dados do ficheiro '{ficheiro_dataset}'...")
 
     dados_treino = preparar_dados_popout(ficheiro_dataset)
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         print("\nA treinar a Arvore de Decisao ID3...")
         arvore_gerada = treinar_id3(dados_treino, atributos, alvo)
 
-        with open('arvore_id3_v5.json', 'w') as f:
+        with open('arvore_adv.json', 'w') as f:
             json.dump(arvore_gerada, f, indent=4)
             
         print("\n=== ARVORE DE DECISAO GERADA ===")
