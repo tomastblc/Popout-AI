@@ -8,7 +8,13 @@ from generate_dataset import state_to_dict
 from id3_popout import classificar, move_from_classe_jogada
 from mcts import MCTS, MCTSConfig
 
-ID3_TREE_FILE = "arvore_tour_craz_2.json"
+ID3_TREE_OPTIONS = [
+    ("id3_v5", "arvore_id3_v5.json"),
+    ("tour base", "arvore_tour_base.json"),
+    ("tour adv", "arvore_tour_adv.json"),
+    ("tour craz 1", "arvore_tour_craz_1.json"),
+    ("tour craz 2", "arvore_tour_craz_2.json"),
+]
 
 
 def piece_at(board, column, row):
@@ -66,12 +72,36 @@ def get_human_move(state):
             print("Column must be an integer between 0 and 6.")
 
 
-def load_id3_tree():
+def load_id3_tree(tree_file):
     try:
-        with open(ID3_TREE_FILE, encoding="utf-8") as f:
-            return json.load(f), ID3_TREE_FILE
+        with open(tree_file, encoding="utf-8") as f:
+            return json.load(f), tree_file
     except FileNotFoundError:
         return None, None
+
+
+def choose_id3_tree():
+    print("\nAvailable ID3 trees:")
+    for i, (label, _) in enumerate(ID3_TREE_OPTIONS, start=1):
+        print(f"  {i} - {label}")
+
+    while True:
+        choice = input(f"Choose tree (1-{len(ID3_TREE_OPTIONS)}): ").strip()
+        try:
+            idx = int(choice) - 1
+            if 0 <= idx < len(ID3_TREE_OPTIONS):
+                break
+        except ValueError:
+            pass
+        print("Invalid option.")
+
+    label, tree_file = ID3_TREE_OPTIONS[idx]
+    tree, path = load_id3_tree(tree_file)
+    if tree is None:
+        print(f"No ID3 JSON found at '{tree_file}'.")
+        return None, None, None
+    print(f"Loaded ID3 tree: {label} ({path})")
+    return tree, label, path
 
 
 def _move_is_legal(state, move):
@@ -147,15 +177,11 @@ def play_game(mode):
         mcts_opponent, mcts_opponent_label = choose_mcts_opponent()
 
     arvore_id3 = None
+    id3_tree_label = None
     if mode == "3":
-        arvore_id3, tree_path = load_id3_tree()
+        arvore_id3, id3_tree_label, _ = choose_id3_tree()
         if arvore_id3 is None:
-            print(
-                f"No ID3 JSON found at '{ID3_TREE_FILE}'. "
-                "Generate it (e.g. run id3_popout.py writing to this path)."
-            )
             return
-        print(f"Loaded ID3 tree from {tree_path}")
 
     while True:
         print_board(state)
@@ -170,7 +196,7 @@ def play_game(mode):
 
         if state.player_to_move == "X":
             if mode == "3":
-                print("Computer (X) thinking via ID3...")
+                print(f"Computer (X) thinking via ID3 ({id3_tree_label})...")
                 move, info = pick_id3_move(state, arvore_id3, ia_mcts_fb)
                 if "MCTS fallback" in info:
                     print(f"  ({info})")

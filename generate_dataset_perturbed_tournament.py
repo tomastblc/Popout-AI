@@ -10,8 +10,8 @@ from generate_dataset import state_to_dict
 from agents import build_agent
 
 
-INPUT_DATASET = "tour_base_1.csv"
-OUTPUT_DATASET = "tour_base_1_perturbed.csv"
+INPUT_DATASET = "tour_adv_1.csv" #change to adv
+OUTPUT_DATASET = "tour_adv_1_perturbed.csv"
 
 # Use a range to keep the perturbation varied.
 # Set both values to the same number if you want a fixed n.
@@ -22,11 +22,11 @@ MAX_PERTURBATION_ATTEMPTS = 3
 ALLOW_RANDOM_DRAW = False
 RANDOM_SEED = 42
 NUM_WORKERS = None
-CHUNK_SIZE = 100
+CHUNK_SIZE = 80
 
 # By default the script labels perturbed states with all available specs.
 # Replace with a subset such as ["UCT_base_10k", "UCT_depth_limited_10k"] if needed.
-SELECTED_SPEC_NAMES = ["UCT_heuristic_rollout", "UCT_epsilon_greedy", "UCT_depth_limited"]
+SELECTED_SPEC_NAMES = ["UCT_heuristic_rollout_10k", "UCT_epsilon_greedy_10k", "UCT_depth_limited_2k"] #change to _2k
 
 # Tournament bookkeeping is removed from the final dataset.
 DROP_COLUMNS = {
