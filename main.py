@@ -1,13 +1,14 @@
 import json
 import time
 
+from agents import AgentSpec, basic_mcts_specs, build_agent
 from bitboard import BitBoard, BitGameState
 from board import Move
 from generate_dataset import state_to_dict
 from id3_popout import classificar, move_from_classe_jogada
-from mcts import MCTS
+from mcts import MCTS, MCTSConfig
 
-ID3_TREE_FILE = "arvore_id3_v5.json"
+ID3_TREE_FILE = "arvore_tour_craz_2.json"
 
 
 def piece_at(board, column, row):
@@ -79,6 +80,48 @@ def _move_is_legal(state, move):
     )
 
 
+def _spec_with_iterations(spec: AgentSpec, iterations: int) -> AgentSpec:
+    return AgentSpec(
+        name=spec.name,
+        kind=spec.kind,
+        config=MCTSConfig(**{**spec.config.__dict__, "iterations": iterations}),
+        random_seed=spec.random_seed,
+    )
+
+
+def choose_mcts_opponent():
+    specs = basic_mcts_specs()
+    print("\nAvailable MCTS variants:")
+    for i, spec in enumerate(specs, start=1):
+        print(f"  {i} - {spec.name}")
+
+    while True:
+        choice = input(f"Choose variant (1-{len(specs)}): ").strip()
+        try:
+            idx = int(choice) - 1
+            if 0 <= idx < len(specs):
+                break
+        except ValueError:
+            pass
+        print("Invalid option.")
+
+    while True:
+        raw = input("MCTS iterations (e.g. 500): ").strip()
+        try:
+            iterations = int(raw)
+            if iterations > 0:
+                break
+        except ValueError:
+            pass
+        print("Enter a positive integer.")
+
+    spec = _spec_with_iterations(specs[idx], iterations)
+    agent = build_agent(spec)
+    label = f"{spec.name} ({iterations} iter)"
+    print(f"Opponent: {label}")
+    return agent, label
+
+
 def pick_id3_move(state, tree, mcts_fallback):
     label = classificar(tree, state_to_dict(state))
     move = move_from_classe_jogada(label)
@@ -95,11 +138,16 @@ def pick_id3_move(state, tree, mcts_fallback):
 
 def play_game(mode):
     state = BitGameState(BitBoard(), player_to_move="X")
-    ia_mcts = MCTS(iterations=1000)
+    ia_mcts = MCTS(iterations=500)
     ia_mcts_fb = MCTS(iterations=200)
 
+    mcts_opponent = None
+    mcts_opponent_label = None
+    if mode == "2":
+        mcts_opponent, mcts_opponent_label = choose_mcts_opponent()
+
     arvore_id3 = None
-    if mode in ("2", "3"):
+    if mode == "3":
         arvore_id3, tree_path = load_id3_tree()
         if arvore_id3 is None:
             print(
@@ -122,20 +170,25 @@ def play_game(mode):
 
         if state.player_to_move == "X":
             if mode == "3":
-                print("Computer (X) thinking via MCTS...")
-                start_time = time.time()
-                move = ia_mcts.search(state)
-                print(f"Took {round(time.time() - start_time, 2)}s")
+                print("Computer (X) thinking via ID3...")
+                move, info = pick_id3_move(state, arvore_id3, ia_mcts_fb)
+                if "MCTS fallback" in info:
+                    print(f"  ({info})")
             else:
                 move = get_human_move(state)
         else:
             if mode == "1":
                 move = get_human_move(state)
-            else:
-                print("Computer (O) thinking via ID3...")
-                move, info = pick_id3_move(state, arvore_id3, ia_mcts_fb)
-                if "MCTS fallback" in info:
-                    print(f"  ({info})")
+            elif mode == "2":
+                print(f"Computer (O) thinking via {mcts_opponent_label}...")
+                start_time = time.time()
+                move = mcts_opponent.choose_move(state)
+                print(f"Took {round(time.time() - start_time, 2)}s")
+            elif mode == "3":
+                print("Computer (O) thinking via MCTS...")
+                start_time = time.time()
+                move = ia_mcts.search(state)
+                print(f"Took {round(time.time() - start_time, 2)}s")
 
         if move.kind == "draw":
             print("\n>>> Move played: DRAW")
@@ -149,8 +202,8 @@ if __name__ == "__main__":
     print(" POPOUT (IA 25/26)")
     print("=" * 30)
     print("1 - Human (X) vs Human (O)")
-    print("2 - Human (X) vs ID3 (O)")
-    print("3 - MCTS (X) vs ID3 (O)")
+    print("2 - Human (X) vs MCTS (O)")
+    print("3 - ID3 (X) vs MCTS (O)")
     print("=" * 30)
 
     while True:

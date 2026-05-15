@@ -15,7 +15,7 @@ FICHEIRO_DATASET = "tour_craz_2.csv"
 FICHEIRO_ARVORE = "arvore_tour_craz_2.json"
 ALVO = "classe_jogada"
 
-# Metadata from tournament generation — not available when predicting from board state alone.
+
 COLUNAS_EXCLUIDAS = {
     ALVO,
     "agent_name",

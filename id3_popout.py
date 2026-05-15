@@ -63,10 +63,9 @@ def treinar_id3(dados, atributos, atributo_alvo):
 
 
 def _valor_chave_arvore_id3(valor):
-    """
-    Árvores guardadas em JSON só têm chaves string; bool/int tornam-se
-    'true'/'false' e '0', '1', ... — alinhar com state_to_dict em runtime.
-    """
+    
+    """Árvores guardadas em JSON só têm chaves string; bool/int tornam-se
+    'true'/'false' e '0', '1', ... — alinhar com state_to_dict em runtime."""
     if isinstance(valor, bool):
         return "true" if valor else "false"
     if isinstance(valor, int):
@@ -95,7 +94,7 @@ def classificar(arvore, exemplo):
 
 
 def move_from_classe_jogada(label):
-    """Converte a classe do dataset (ex.: drop_3, pop_0, draw_None) num Move."""
+    #Converte a classe do dataset (ex.: drop_3, pop_0, draw_None) num Move.
     from board import Move
 
     if not label or label == "Desconhecido" or not isinstance(label, str):

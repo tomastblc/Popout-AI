@@ -123,6 +123,5 @@ def guardar_csv(dados, nome_ficheiro="popout_dataset_v4.csv"):
 
 
 if __name__ == "__main__":
-    # Keep process creation under the __main__ guard for Windows compatibility.
     dataset = gerar_jogos(num_jogos=750, iteracoes_mcts=1000, num_workers=os.cpu_count() or 1)
     guardar_csv(dataset)
