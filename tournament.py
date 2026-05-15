@@ -3,7 +3,7 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 from bitboard import BitBoard, BitGameState
-from agents import AgentSpec, build_agent, default_mcts_specs
+from agents import AgentSpec, build_agent, default_mcts_specs, up10k_mcts_specs 
 
 
 def play_game(agent_x, agent_o):
@@ -204,7 +204,7 @@ def _record_match_result(table, detailed_results, spec_a, spec_b, result):
 
 
 if __name__ == "__main__":
-    specs = default_mcts_specs()
+    specs = up10k_mcts_specs()
     summary = round_robin(specs, games_per_side=4, num_workers=os.cpu_count() or 1)
 
     print("\nRanking:")
