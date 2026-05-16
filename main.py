@@ -14,6 +14,7 @@ ID3_TREE_OPTIONS = [
     ("tour adv", "arvore_tour_adv.json"),
     ("tour craz 1", "arvore_tour_craz_1.json"),
     ("tour craz 2", "arvore_tour_craz_2.json"),
+    ("perturbed craz", "arvore_tour_craz_1_perturbed.json")
 ]
 
 
@@ -80,13 +81,21 @@ def load_id3_tree(tree_file):
         return None, None
 
 
-def choose_id3_tree():
-    print("\nAvailable ID3 trees:")
+def choose_id3_tree(player_label=None):
+    if player_label:
+        print(f"\nID3 tree for player {player_label}:")
+    else:
+        print("\nAvailable ID3 trees:")
     for i, (label, _) in enumerate(ID3_TREE_OPTIONS, start=1):
         print(f"  {i} - {label}")
 
+    prompt = f"Choose tree (1-{len(ID3_TREE_OPTIONS)})"
+    if player_label:
+        prompt += f" for {player_label}"
+    prompt += ": "
+
     while True:
-        choice = input(f"Choose tree (1-{len(ID3_TREE_OPTIONS)}): ").strip()
+        choice = input(prompt).strip()
         try:
             idx = int(choice) - 1
             if 0 <= idx < len(ID3_TREE_OPTIONS):
@@ -168,20 +177,30 @@ def pick_id3_move(state, tree, mcts_fallback):
 
 def play_game(mode):
     state = BitGameState(BitBoard(), player_to_move="X")
-    ia_mcts = MCTS(iterations=500)
     ia_mcts_fb = MCTS(iterations=200)
-
-    mcts_opponent = None
-    mcts_opponent_label = None
-    if mode == "2":
-        mcts_opponent, mcts_opponent_label = choose_mcts_opponent()
 
     arvore_id3 = None
     id3_tree_label = None
+    arvore_id3_x = None
+    id3_label_x = None
+    arvore_id3_o = None
+    id3_label_o = None
     if mode == "3":
-        arvore_id3, id3_tree_label, _ = choose_id3_tree()
+        arvore_id3, id3_tree_label, _ = choose_id3_tree("X")
         if arvore_id3 is None:
             return
+    elif mode == "4":
+        arvore_id3_x, id3_label_x, _ = choose_id3_tree("X")
+        if arvore_id3_x is None:
+            return
+        arvore_id3_o, id3_label_o, _ = choose_id3_tree("O")
+        if arvore_id3_o is None:
+            return
+
+    mcts_opponent = None
+    mcts_opponent_label = None
+    if mode in ("2", "3"):
+        mcts_opponent, mcts_opponent_label = choose_mcts_opponent()
 
     while True:
         print_board(state)
@@ -194,26 +213,28 @@ def play_game(mode):
             print("\nThe game ended in a draw.")
             break
 
-        if state.player_to_move == "X":
+        if mode == "4" or (mode == "3" and state.player_to_move == "X"):
             if mode == "3":
-                print(f"Computer (X) thinking via ID3 ({id3_tree_label})...")
-                move, info = pick_id3_move(state, arvore_id3, ia_mcts_fb)
-                if "MCTS fallback" in info:
-                    print(f"  ({info})")
+                tree, label = arvore_id3, id3_tree_label
             else:
-                move = get_human_move(state)
+                tree = arvore_id3_x if state.player_to_move == "X" else arvore_id3_o
+                label = id3_label_x if state.player_to_move == "X" else id3_label_o
+
+            print(
+                f"Computer ({state.player_to_move}) thinking via ID3 ({label})..."
+            )
+            move, info = pick_id3_move(state, tree, ia_mcts_fb)
+            if "MCTS fallback" in info:
+                print(f"  ({info})")
+        elif state.player_to_move == "X":
+            move = get_human_move(state)
         else:
             if mode == "1":
                 move = get_human_move(state)
-            elif mode == "2":
+            elif mode in ("2", "3"):
                 print(f"Computer (O) thinking via {mcts_opponent_label}...")
                 start_time = time.time()
                 move = mcts_opponent.choose_move(state)
-                print(f"Took {round(time.time() - start_time, 2)}s")
-            elif mode == "3":
-                print("Computer (O) thinking via MCTS...")
-                start_time = time.time()
-                move = ia_mcts.search(state)
                 print(f"Took {round(time.time() - start_time, 2)}s")
 
         if move.kind == "draw":
@@ -230,11 +251,12 @@ if __name__ == "__main__":
     print("1 - Human (X) vs Human (O)")
     print("2 - Human (X) vs MCTS (O)")
     print("3 - ID3 (X) vs MCTS (O)")
+    print("4 - ID3 (X) vs ID3 (O)")
     print("=" * 30)
 
     while True:
-        mode = input("Choose game mode (1/2/3): ")
-        if mode in ("1", "2", "3"):
+        mode = input("Choose game mode (1/2/3/4): ")
+        if mode in ("1", "2", "3", "4"):
             play_game(mode)
             break
         print("Invalid option.")

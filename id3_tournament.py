@@ -11,8 +11,8 @@ from id3_popout import (
     treinar_id3,
 )
 
-FICHEIRO_DATASET = "tour_craz_2.csv"
-FICHEIRO_ARVORE = "arvore_tour_craz_2.json"
+FICHEIRO_DATASET = "tour_craz_1.csv"
+FICHEIRO_ARVORE = "arvore_tour_craz_1.json"
 ALVO = "classe_jogada"
 
 

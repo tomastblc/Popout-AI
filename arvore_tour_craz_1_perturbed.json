@@ -1,0 +1,1048 @@
+{
+    "c3_r3": {
+        "X": {
+            "c2_r3": {
+                "X": {
+                    "c5_r3": {
+                        "X": "drop_1",
+                        "O": {
+                            "c4_r0": {
+                                "X": {
+                                    "c2_r5": {
+                                        "X": "drop_6",
+                                        "O": "pop_2",
+                                        "Vazio": "drop_3"
+                                    }
+                                },
+                                "O": "drop_3",
+                                "Vazio": "drop_4"
+                            }
+                        },
+                        "Vazio": {
+                            "c6_r1": {
+                                "X": {
+                                    "c1_r0": {
+                                        "X": {
+                                            "repetition_count": {
+                                                "0": "drop_1",
+                                                "1": "pop_6",
+                                                "2": "pop_6",
+                                                "3": "draw_None"
+                                            }
+                                        },
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c3_r4": {
+                                                "X": "drop_1",
+                                                "O": "pop_6",
+                                                "Vazio": {
+                                                    "c6_r0": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_5"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": {
+                                    "c0_r4": {
+                                        "X": "drop_1",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_6"
+                                    }
+                                },
+                                "Vazio": {
+                                    "c1_r0": {
+                                        "X": "drop_1",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_4"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "O": {
+                    "c4_r1": {
+                        "X": {
+                            "c5_r3": {
+                                "X": "drop_4",
+                                "O": {
+                                    "c0_r0": {
+                                        "X": "pop_3",
+                                        "O": "pop_3",
+                                        "Vazio": "drop_4"
+                                    }
+                                },
+                                "Vazio": {
+                                    "c1_r1": {
+                                        "X": "pop_2",
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c2_r4": {
+                                                "X": "drop_4",
+                                                "O": "drop_1",
+                                                "Vazio": "drop_6"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "O": "drop_5",
+                        "Vazio": {
+                            "c5_r3": {
+                                "X": {
+                                    "c6_r0": {
+                                        "X": "drop_6",
+                                        "O": "pop_6",
+                                        "Vazio": "drop_0"
+                                    }
+                                },
+                                "O": {
+                                    "c4_r0": {
+                                        "X": "drop_4",
+                                        "O": "drop_4",
+                                        "Vazio": "drop_2"
+                                    }
+                                },
+                                "Vazio": {
+                                    "c6_r0": {
+                                        "X": "drop_5",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_5"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "Vazio": {
+                    "c4_r0": {
+                        "X": {
+                            "c4_r2": {
+                                "X": {
+                                    "c1_r0": {
+                                        "X": "drop_0",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_1"
+                                    }
+                                },
+                                "O": {
+                                    "c2_r2": {
+                                        "X": "drop_5",
+                                        "O": {
+                                            "c5_r1": {
+                                                "X": "drop_2",
+                                                "O": "drop_5",
+                                                "Vazio": {
+                                                    "c5_r0": {
+                                                        "X": "pop_3",
+                                                        "O": "drop_1",
+                                                        "Vazio": "drop_5"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c4_r4": {
+                                                "X": "drop_5",
+                                                "O": "drop_2",
+                                                "Vazio": {
+                                                    "c5_r0": {
+                                                        "X": "pop_6",
+                                                        "O": {
+                                                            "c2_r1": {
+                                                                "X": "drop_5",
+                                                                "O": "drop_2",
+                                                                "Vazio": "drop_4"
+                                                            }
+                                                        },
+                                                        "Vazio": "drop_5"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c5_r0": {
+                                        "X": {
+                                            "c1_r0": {
+                                                "X": "drop_6",
+                                                "O": "drop_6",
+                                                "Vazio": {
+                                                    "c3_r4": {
+                                                        "X": "drop_6",
+                                                        "O": "drop_5",
+                                                        "Vazio": "drop_2"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "O": {
+                                            "c6_r0": {
+                                                "X": "pop_1",
+                                                "O": "drop_2",
+                                                "Vazio": "drop_4"
+                                            }
+                                        },
+                                        "Vazio": "drop_1"
+                                    }
+                                }
+                            }
+                        },
+                        "O": {
+                            "c2_r0": {
+                                "X": {
+                                    "c4_r3": {
+                                        "X": "drop_4",
+                                        "O": "pop_2",
+                                        "Vazio": {
+                                            "c6_r0": {
+                                                "X": "drop_4",
+                                                "O": "drop_4",
+                                                "Vazio": {
+                                                    "player_to_move": {
+                                                        "X": "drop_4",
+                                                        "O": "drop_0"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": {
+                                    "c1_r2": {
+                                        "X": "drop_2",
+                                        "O": "drop_1",
+                                        "Vazio": {
+                                            "c6_r0": {
+                                                "X": "drop_5",
+                                                "O": "drop_2",
+                                                "Vazio": "drop_4"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c4_r3": {
+                                        "X": "drop_1",
+                                        "O": {
+                                            "c5_r0": {
+                                                "X": "drop_1",
+                                                "O": "pop_5",
+                                                "Vazio": "drop_0"
+                                            }
+                                        },
+                                        "Vazio": "drop_4"
+                                    }
+                                }
+                            }
+                        },
+                        "Vazio": {
+                            "c1_r0": {
+                                "X": "drop_1",
+                                "O": "drop_1",
+                                "Vazio": {
+                                    "c2_r1": {
+                                        "X": "drop_4",
+                                        "O": "drop_2",
+                                        "Vazio": "drop_5"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "O": {
+            "c2_r2": {
+                "X": {
+                    "c2_r3": {
+                        "X": {
+                            "c1_r0": {
+                                "X": {
+                                    "c5_r0": {
+                                        "X": "drop_1",
+                                        "O": "drop_4",
+                                        "Vazio": "drop_1"
+                                    }
+                                },
+                                "O": "drop_1",
+                                "Vazio": "drop_5"
+                            }
+                        },
+                        "O": {
+                            "c4_r3": {
+                                "X": "drop_1",
+                                "O": "drop_0",
+                                "Vazio": {
+                                    "c5_r2": {
+                                        "X": "pop_3",
+                                        "O": "drop_6",
+                                        "Vazio": {
+                                            "c1_r0": {
+                                                "X": {
+                                                    "c3_r4": {
+                                                        "X": {
+                                                            "c1_r2": {
+                                                                "X": "drop_4",
+                                                                "O": "drop_4",
+                                                                "Vazio": "drop_5"
+                                                            }
+                                                        },
+                                                        "O": "drop_4",
+                                                        "Vazio": {
+                                                            "c1_r2": {
+                                                                "X": "drop_4",
+                                                                "O": "drop_3",
+                                                                "Vazio": "drop_1"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "O": "drop_5",
+                                                "Vazio": "drop_5"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "Vazio": {
+                            "c5_r0": {
+                                "X": {
+                                    "c1_r0": {
+                                        "X": "drop_6",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_3"
+                                    }
+                                },
+                                "O": "drop_1",
+                                "Vazio": "drop_2"
+                            }
+                        }
+                    }
+                },
+                "O": {
+                    "c1_r0": {
+                        "X": {
+                            "c1_r2": {
+                                "X": {
+                                    "c0_r2": {
+                                        "X": "drop_2",
+                                        "O": "drop_1",
+                                        "Vazio": "pop_1"
+                                    }
+                                },
+                                "O": "drop_1",
+                                "Vazio": "drop_1"
+                            }
+                        },
+                        "O": {
+                            "c1_r1": {
+                                "X": "drop_6",
+                                "O": "pop_2",
+                                "Vazio": {
+                                    "c0_r1": {
+                                        "X": "drop_1",
+                                        "O": "drop_4",
+                                        "Vazio": "drop_2"
+                                    }
+                                }
+                            }
+                        },
+                        "Vazio": {
+                            "c5_r0": {
+                                "X": {
+                                    "c6_r0": {
+                                        "X": {
+                                            "c4_r3": {
+                                                "X": "drop_6",
+                                                "O": "drop_5",
+                                                "Vazio": "drop_4"
+                                            }
+                                        },
+                                        "O": {
+                                            "c4_r4": {
+                                                "X": "drop_5",
+                                                "O": "drop_5",
+                                                "Vazio": {
+                                                    "c6_r1": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_2",
+                                                        "Vazio": "drop_4"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c4_r0": {
+                                                "X": "drop_6",
+                                                "O": "drop_4",
+                                                "Vazio": "drop_5"
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": {
+                                    "c4_r0": {
+                                        "X": {
+                                            "c0_r0": {
+                                                "X": "pop_3",
+                                                "O": "drop_4",
+                                                "Vazio": "drop_2"
+                                            }
+                                        },
+                                        "O": "drop_4",
+                                        "Vazio": {
+                                            "c0_r0": {
+                                                "X": {
+                                                    "c5_r2": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_5",
+                                                        "Vazio": {
+                                                            "c2_r5": {
+                                                                "X": "drop_3",
+                                                                "Vazio": "drop_2"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "O": "drop_5",
+                                                "Vazio": "drop_5"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c2_r3": {
+                                        "X": "drop_5",
+                                        "O": "drop_2",
+                                        "Vazio": "drop_2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "Vazio": {
+                    "c1_r1": {
+                        "X": {
+                            "c4_r3": {
+                                "X": "drop_2",
+                                "O": {
+                                    "c1_r3": {
+                                        "X": "drop_0",
+                                        "O": {
+                                            "c2_r0": {
+                                                "X": "drop_2",
+                                                "O": "drop_2",
+                                                "Vazio": "drop_0"
+                                            }
+                                        },
+                                        "Vazio": "drop_2"
+                                    }
+                                },
+                                "Vazio": "drop_2"
+                            }
+                        },
+                        "O": {
+                            "c5_r0": {
+                                "X": {
+                                    "c2_r0": {
+                                        "X": "drop_5",
+                                        "O": {
+                                            "c4_r4": {
+                                                "X": "drop_2",
+                                                "O": "pop_5",
+                                                "Vazio": {
+                                                    "c5_r2": {
+                                                        "X": "pop_5",
+                                                        "O": "drop_2",
+                                                        "Vazio": "pop_3"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": "drop_5"
+                                    }
+                                },
+                                "O": "drop_5",
+                                "Vazio": "drop_2"
+                            }
+                        },
+                        "Vazio": {
+                            "c3_r4": {
+                                "X": {
+                                    "c6_r0": {
+                                        "X": {
+                                            "c2_r0": {
+                                                "X": {
+                                                    "c0_r0": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_4",
+                                                        "Vazio": "drop_2"
+                                                    }
+                                                },
+                                                "O": "drop_5",
+                                                "Vazio": "drop_4"
+                                            }
+                                        },
+                                        "O": "pop_4",
+                                        "Vazio": {
+                                            "c5_r0": {
+                                                "X": "drop_4",
+                                                "O": "drop_6",
+                                                "Vazio": "drop_1"
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": {
+                                    "c4_r1": {
+                                        "X": "drop_5",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_4"
+                                    }
+                                },
+                                "Vazio": {
+                                    "c3_r2": {
+                                        "X": {
+                                            "c6_r0": {
+                                                "X": "drop_2",
+                                                "O": "drop_4",
+                                                "Vazio": "drop_2"
+                                            }
+                                        },
+                                        "O": "drop_3"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Vazio": {
+            "c3_r0": {
+                "X": {
+                    "c2_r0": {
+                        "X": {
+                            "c1_r0": {
+                                "X": {
+                                    "c0_r0": {
+                                        "O": {
+                                            "c2_r3": {
+                                                "X": "drop_5",
+                                                "O": {
+                                                    "c1_r1": {
+                                                        "X": {
+                                                            "c3_r1": {
+                                                                "X": "drop_1",
+                                                                "O": "pop_3",
+                                                                "Vazio": "drop_3"
+                                                            }
+                                                        },
+                                                        "O": "pop_3",
+                                                        "Vazio": "drop_2"
+                                                    }
+                                                },
+                                                "Vazio": {
+                                                    "c3_r2": {
+                                                        "X": "drop_0",
+                                                        "O": {
+                                                            "c5_r0": {
+                                                                "X": "drop_3",
+                                                                "O": "drop_4",
+                                                                "Vazio": "drop_3"
+                                                            }
+                                                        },
+                                                        "Vazio": {
+                                                            "c1_r1": {
+                                                                "X": "drop_2",
+                                                                "O": "drop_2",
+                                                                "Vazio": {
+                                                                    "c2_r1": {
+                                                                        "X": "drop_2",
+                                                                        "O": "drop_1",
+                                                                        "Vazio": "drop_2"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": "drop_0"
+                                    }
+                                },
+                                "O": {
+                                    "c2_r1": {
+                                        "X": {
+                                            "c4_r2": {
+                                                "X": "drop_3",
+                                                "O": "drop_1",
+                                                "Vazio": {
+                                                    "c2_r3": {
+                                                        "X": "drop_3",
+                                                        "O": "drop_3",
+                                                        "Vazio": {
+                                                            "c6_r0": {
+                                                                "X": "drop_4",
+                                                                "O": {
+                                                                    "c5_r2": {
+                                                                        "X": "drop_2",
+                                                                        "O": "drop_0",
+                                                                        "Vazio": {
+                                                                            "player_to_move": {
+                                                                                "X": "drop_2",
+                                                                                "O": "drop_4"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "Vazio": "drop_1"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "O": {
+                                            "c2_r2": {
+                                                "X": {
+                                                    "c3_r2": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_2",
+                                                        "Vazio": "pop_2"
+                                                    }
+                                                },
+                                                "O": {
+                                                    "c4_r0": {
+                                                        "X": "drop_4",
+                                                        "O": "pop_2"
+                                                    }
+                                                },
+                                                "Vazio": {
+                                                    "c1_r2": {
+                                                        "X": "pop_2",
+                                                        "O": "drop_0",
+                                                        "Vazio": "drop_5"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c4_r0": {
+                                                "X": "drop_4",
+                                                "O": "drop_3",
+                                                "Vazio": "drop_4"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c4_r0": {
+                                        "X": {
+                                            "player_to_move": {
+                                                "X": "drop_1",
+                                                "O": {
+                                                    "c5_r1": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_1",
+                                                        "Vazio": {
+                                                            "c2_r1": {
+                                                                "X": "drop_5",
+                                                                "O": "drop_5",
+                                                                "Vazio": "drop_1"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "O": {
+                                            "c0_r0": {
+                                                "X": "drop_1",
+                                                "O": "drop_4",
+                                                "Vazio": "drop_1"
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c0_r0": {
+                                                "X": "drop_1",
+                                                "O": "drop_4",
+                                                "Vazio": "drop_4"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "O": {
+                            "c5_r0": {
+                                "X": {
+                                    "c6_r0": {
+                                        "X": "drop_4",
+                                        "O": {
+                                            "c5_r1": {
+                                                "X": "drop_4",
+                                                "O": {
+                                                    "c6_r2": {
+                                                        "X": "drop_4",
+                                                        "O": "pop_4",
+                                                        "Vazio": {
+                                                            "c6_r1": {
+                                                                "X": "drop_2",
+                                                                "O": "drop_4",
+                                                                "Vazio": "drop_5"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "Vazio": "drop_3"
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c4_r0": {
+                                                "X": "drop_6",
+                                                "O": "drop_3",
+                                                "Vazio": "drop_4"
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": {
+                                    "c1_r2": {
+                                        "X": "drop_0",
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c4_r2": {
+                                                "X": "drop_3",
+                                                "O": "drop_3",
+                                                "Vazio": {
+                                                    "c4_r0": {
+                                                        "X": {
+                                                            "c3_r2": {
+                                                                "X": "drop_4",
+                                                                "O": "drop_2",
+                                                                "Vazio": {
+                                                                    "c4_r1": {
+                                                                        "X": "drop_4",
+                                                                        "O": "drop_3",
+                                                                        "Vazio": "drop_3"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "O": {
+                                                            "c0_r0": {
+                                                                "X": "drop_4",
+                                                                "O": {
+                                                                    "c6_r0": {
+                                                                        "X": "drop_4",
+                                                                        "O": "drop_2",
+                                                                        "Vazio": "drop_2"
+                                                                    }
+                                                                },
+                                                                "Vazio": "drop_2"
+                                                            }
+                                                        },
+                                                        "Vazio": {
+                                                            "c3_r2": {
+                                                                "X": "drop_3",
+                                                                "O": "drop_5",
+                                                                "Vazio": {
+                                                                    "c3_r1": {
+                                                                        "X": "drop_3",
+                                                                        "O": "drop_2",
+                                                                        "Vazio": "drop_3"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c4_r0": {
+                                        "X": {
+                                            "c6_r0": {
+                                                "X": "drop_5",
+                                                "O": "drop_2",
+                                                "Vazio": "drop_5"
+                                            }
+                                        },
+                                        "O": {
+                                            "c0_r0": {
+                                                "X": "drop_3",
+                                                "O": "drop_4",
+                                                "Vazio": {
+                                                    "c3_r1": {
+                                                        "X": "drop_3",
+                                                        "O": "drop_4",
+                                                        "Vazio": "drop_3"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": "drop_2"
+                                    }
+                                }
+                            }
+                        },
+                        "Vazio": {
+                            "c3_r1": {
+                                "X": "drop_3",
+                                "O": {
+                                    "c6_r0": {
+                                        "X": {
+                                            "c4_r0": {
+                                                "X": "drop_2",
+                                                "O": "drop_4",
+                                                "Vazio": {
+                                                    "c5_r0": {
+                                                        "X": "drop_4",
+                                                        "O": "drop_2",
+                                                        "Vazio": "drop_4"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c1_r1": {
+                                                "X": "drop_2",
+                                                "O": "drop_3",
+                                                "Vazio": {
+                                                    "c4_r1": {
+                                                        "X": "drop_4",
+                                                        "O": "drop_4",
+                                                        "Vazio": {
+                                                            "c0_r0": {
+                                                                "X": "drop_2",
+                                                                "O": "drop_0",
+                                                                "Vazio": {
+                                                                    "c3_r2": {
+                                                                        "X": "drop_2",
+                                                                        "O": "drop_2",
+                                                                        "Vazio": {
+                                                                            "c1_r0": {
+                                                                                "X": "drop_2",
+                                                                                "O": "drop_4",
+                                                                                "Vazio": "drop_4"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Vazio": {
+                                    "c4_r0": {
+                                        "X": "drop_2",
+                                        "O": {
+                                            "c1_r0": {
+                                                "X": "drop_2",
+                                                "O": "drop_3",
+                                                "Vazio": {
+                                                    "c4_r1": {
+                                                        "X": "drop_3",
+                                                        "O": "drop_4",
+                                                        "Vazio": {
+                                                            "c0_r0": {
+                                                                "X": "drop_2",
+                                                                "O": "drop_3",
+                                                                "Vazio": "drop_3"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "Vazio": {
+                                            "c1_r0": {
+                                                "X": "drop_4",
+                                                "O": "drop_4",
+                                                "Vazio": {
+                                                    "c0_r0": {
+                                                        "X": "drop_2",
+                                                        "O": "drop_4",
+                                                        "Vazio": "drop_2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "O": {
+                    "c2_r0": {
+                        "X": {
+                            "c5_r0": {
+                                "X": {
+                                    "c4_r1": {
+                                        "X": {
+                                            "c2_r1": {
+                                                "X": "drop_4",
+                                                "O": "pop_6",
+                                                "Vazio": "drop_3"
+                                            }
+                                        },
+                                        "O": "drop_3",
+                                        "Vazio": "drop_1"
+                                    }
+                                },
+                                "O": "drop_3",
+                                "Vazio": {
+                                    "c6_r0": {
+                                        "X": {
+                                            "c2_r2": {
+                                                "X": "drop_1",
+                                                "O": "pop_6",
+                                                "Vazio": "drop_4"
+                                            }
+                                        },
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c3_r1": {
+                                                "X": {
+                                                    "c1_r0": {
+                                                        "X": "drop_3",
+                                                        "O": "drop_1",
+                                                        "Vazio": {
+                                                            "c4_r0": {
+                                                                "X": "drop_4",
+                                                                "O": "drop_5",
+                                                                "Vazio": "drop_2"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "O": {
+                                                    "c0_r1": {
+                                                        "O": "drop_4",
+                                                        "Vazio": {
+                                                            "c3_r2": {
+                                                                "X": "drop_2",
+                                                                "O": "drop_3",
+                                                                "Vazio": "drop_3"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "Vazio": "drop_3"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "O": {
+                            "c1_r0": {
+                                "X": {
+                                    "c2_r2": {
+                                        "X": {
+                                            "c5_r0": {
+                                                "X": "drop_1",
+                                                "O": {
+                                                    "c3_r2": {
+                                                        "X": "drop_4",
+                                                        "O": "drop_4",
+                                                        "Vazio": "pop_5"
+                                                    }
+                                                },
+                                                "Vazio": "drop_0"
+                                            }
+                                        },
+                                        "O": "drop_2",
+                                        "Vazio": {
+                                            "c4_r0": {
+                                                "X": "drop_3",
+                                                "O": "drop_5",
+                                                "Vazio": "drop_3"
+                                            }
+                                        }
+                                    }
+                                },
+                                "O": "drop_0",
+                                "Vazio": {
+                                    "c0_r0": {
+                                        "X": "drop_2",
+                                        "O": "drop_1",
+                                        "Vazio": {
+                                            "player_to_move": {
+                                                "X": {
+                                                    "c5_r0": {
+                                                        "X": "drop_1",
+                                                        "O": "drop_4",
+                                                        "Vazio": "drop_4"
+                                                    }
+                                                },
+                                                "O": "drop_1"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "Vazio": {
+                            "c6_r0": {
+                                "X": "drop_2",
+                                "O": {
+                                    "c4_r0": {
+                                        "X": "drop_1",
+                                        "O": "drop_5",
+                                        "Vazio": "drop_4"
+                                    }
+                                },
+                                "Vazio": {
+                                    "c1_r0": {
+                                        "X": "drop_4",
+                                        "O": "drop_2",
+                                        "Vazio": "drop_4"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "Vazio": {
+                    "c5_r1": {
+                        "X": "drop_3",
+                        "O": "drop_3",
+                        "Vazio": {
+                            "c2_r0": {
+                                "X": {
+                                    "c2_r2": {
+                                        "X": "drop_4",
+                                        "O": "drop_1",
+                                        "Vazio": "drop_3"
+                                    }
+                                },
+                                "O": "drop_3",
+                                "Vazio": "drop_3"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
