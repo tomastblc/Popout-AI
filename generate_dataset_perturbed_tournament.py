@@ -11,7 +11,7 @@ from agents import build_agent
 
 
 INPUT_DATASET = "tour_craz_1.csv" #change to adv
-OUTPUT_DATASET = "tour_craz_1_perturbed.csv"
+OUTPUT_DATASET = "tour_craz_2_perturbed.csv"
 
 # Use a range to keep the perturbation varied.
 # Set both values to the same number if you want a fixed n.
@@ -26,7 +26,7 @@ CHUNK_SIZE = 80
 
 # By default the script labels perturbed states with all available specs.
 # Replace with a subset such as ["UCT_base_10k", "UCT_depth_limited_10k"] if needed.
-SELECTED_SPEC_NAMES = ["UCT_heuristic_rollout_10k", "UCT_epsilon_greedy_10k", "UCT_depth_limited_10k"] #change to _2k
+SELECTED_SPEC_NAMES = ["UCT_base_10k", "UCT_low_c_10k", "UCT_heuristic_rollout_10k"] #change to _2k
 
 # Tournament bookkeeping is removed from the final dataset.
 DROP_COLUMNS = {
