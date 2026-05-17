@@ -1,12 +1,14 @@
+"""ID3 training and inference helpers used by the final PopOut notebook."""
+
+import json
 import math
 import pprint
 from collections import Counter
-import json
 
 import pandas as pd
 
-from board import Board, GameState
-from generate_dataset import state_to_dict
+from libs.bitboard import BitBoard, BitGameState, Move
+from generate_dataset_tournament import state_to_dict
 
 ALVO = "classe_jogada"
 COLUNAS_EXCLUIDAS = {
@@ -23,6 +25,7 @@ COLUNAS_EXCLUIDAS = {
 
 
 def entropia(dados, atributo_alvo):
+    """Compute the Shannon entropy of the target attribute in ``dados``."""
     frequencias = Counter(linha[atributo_alvo] for linha in dados)
     total = len(dados)
     ent = 0.0
@@ -33,6 +36,7 @@ def entropia(dados, atributo_alvo):
 
 
 def ganho_informacao(dados, atributo_divisao, atributo_alvo):
+    """Measure how much a split on one attribute reduces target entropy."""
     entropia_total = entropia(dados, atributo_alvo)
     valores_atributo = set(linha[atributo_divisao] for linha in dados)
 
@@ -46,6 +50,7 @@ def ganho_informacao(dados, atributo_divisao, atributo_alvo):
 
 
 def treinar_id3(dados, atributos, atributo_alvo):
+    """Train an ID3 decision tree from categorical examples."""
     valores_alvo = [linha[atributo_alvo] for linha in dados]
 
     if len(set(valores_alvo)) == 1:
@@ -76,9 +81,7 @@ def treinar_id3(dados, atributos, atributo_alvo):
 
 
 def _valor_chave_arvore_id3(valor):
-    
-    """Árvores guardadas em JSON só têm chaves string; bool/int tornam-se
-    'true'/'false' e '0', '1', ... — alinhar com state_to_dict em runtime."""
+    """Normalize runtime values so they match JSON string keys in saved trees."""
     if isinstance(valor, bool):
         return "true" if valor else "false"
     if isinstance(valor, int):
@@ -89,6 +92,7 @@ def _valor_chave_arvore_id3(valor):
 
 
 def classificar(arvore, exemplo):
+    """Classify one example by recursively traversing the trained tree."""
     if not isinstance(arvore, dict):
         return arvore
 
@@ -107,16 +111,16 @@ def classificar(arvore, exemplo):
 
 
 def move_from_classe_jogada(label):
-    #Converte a classe do dataset (ex.: drop_3, pop_0, draw_None) num Move.
-    from board import Move
-
+    """Convert a dataset label such as ``drop_3`` into a ``Move`` object."""
     if not label or label == "Desconhecido" or not isinstance(label, str):
         return None
     if label.startswith("draw"):
         return Move("draw", None)
+
     parts = label.split("_", 1)
     if len(parts) != 2:
         return None
+
     kind, col_s = parts
     try:
         col = int(col_s)
@@ -126,6 +130,7 @@ def move_from_classe_jogada(label):
 
 
 def preparar_dados_popout(caminho_csv):
+    """Load a PopOut dataset CSV and return it as a list of row dictionaries."""
     try:
         df = pd.read_csv(caminho_csv)
         return df.to_dict(orient="records")
@@ -135,39 +140,12 @@ def preparar_dados_popout(caminho_csv):
 
 
 def atributos_treino_popout(dados, atributo_alvo=ALVO):
+    """List the input feature columns that should be used for ID3 training."""
     colunas_excluidas = set(COLUNAS_EXCLUIDAS)
     colunas_excluidas.add(atributo_alvo)
     return [chave for chave in dados[0].keys() if chave not in colunas_excluidas]
 
 
 def construir_exemplo_estado(state):
+    """Convert a game state into the flat feature dictionary used by ID3."""
     return state_to_dict(state)
-
-
-if __name__ == "__main__":
-    ficheiro_dataset = "tour_base_1_perturbed.csv"
-    ficheiro_arvore = "arvore_popout_perturbed.json"
-    print(f"A preparar os dados do ficheiro '{ficheiro_dataset}'...")
-
-    dados_treino = preparar_dados_popout(ficheiro_dataset)
-
-    if not dados_treino:
-        print("Corre primeiro o 'generate_dataset.py' para criar os dados.")
-    else:
-        atributos = atributos_treino_popout(dados_treino, ALVO)
-
-        print(f"\nA treinar a Arvore de Decisao ID3 ({len(dados_treino)} exemplos)...")
-        arvore_gerada = treinar_id3(dados_treino, atributos, ALVO)
-
-        with open(ficheiro_arvore, 'w') as f:
-            json.dump(arvore_gerada, f, indent=4)
-        print(f"Arvore guardada em '{ficheiro_arvore}'.")
-            
-        print("\n=== ARVORE DE DECISAO GERADA ===")
-        pprint.pprint(arvore_gerada, width=80, depth=3)
-
-        print("\n=== TESTAR COM O ESTADO INICIAL ===")
-        estado_inicial = GameState(Board(), player_to_move="X")
-        exemplo_inicial = construir_exemplo_estado(estado_inicial)
-        previsao = classificar(arvore_gerada, exemplo_inicial)
-        print(f"Com o tabuleiro vazio, a Arvore preve a jogada: {previsao}")

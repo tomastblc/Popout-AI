@@ -1,0 +1,159 @@
+--- PAGE 1 ---
+Projeto IA 25/26 
+Autores 
+Kirill Egorkin 
+T omás Carvalhosa 
+
+--- PAGE 2 ---
+Primeiro Capítulo: Estrutura do Tabuleiro 
+Importância da Performance 
+A estrutura do tabuleiro é crucial para a 
+performance, especialmente com o 
+algoritmo MCTS . Este método exige um 
+volume elevado de simulações para cada 
+jogada, tornando a eficiência de dados um 
+requisito fundamental. Implementação Bitboard 
+Utilizamos Bitboards  (inteiros de 64 bits) 
+para representar o estado do jogo. 
+● Operações Dr op  e P op  são efetuadas 
+via bit -shif ting  aritmético. 
+● Redução de 95% no tempo de 
+execução. 
+● De 20s para apenas 0,9s. 
+
+--- PAGE 3 ---
+Segundo Capítulo: Pesquisa MCTS 
+Passos da Execução 
+O algoritmo Monte Carlo Tree Search 
+percorre um ciclo iterativo fundamental: 
+● Seleç ão 
+● Exp ansão 
+● R ollout 
+● Backpr op agation Variantes e Parâmetros 
+Para além da implementação básica, o 
+MCTS pode ser otimizado através de: 
+● Mudança das Regras de Rollout 
+● Ajuste de Regras de Expansão 
+● Alteração do valor de C no UCT para 
+manipular a Exploração 
+
+
+--- PAGE 4 ---
+Variantes de MCTS 
+Exploração via C 
+C baixo:  Afunila a exploração em jogadas com alta 
+taxa de vitória. 
+C elevado:  Prioriza a exploração de nós menos 
+visitados. Expansão & Rollout 
+Expansão Aleatória:  Escolhe k jogadas aleatórias em 
+vez de todas. 
+Heuristic Rollout:  Simulação guiada por regras 
+específicas em vez de aleatória. 
+Outras Otimizações 
+Epsilon Greedy:  Rollout inteligente com probabilidade de movimentos aleatórios. 
+Depth Limited:  Interrompe a simulação ao atingir um limite de profundidade. 
+Variantes obtidas ao aplicar mudanças ao algoritmo-base. 
+
+--- PAGE 5 ---
+Resultados torneio 
+C baixo 34.0 
+Base 32.0 
+Heurística 27 .0 
+C elevado 26.0 
+Epsilon 26.0 
+Depth 23.0 
+k3_rand 0.0 
+
+--- PAGE 6 ---
+Gerar os datasets 
+Processo de Geração 
+Para gerar os datasets a serem treinados criamos um script que coloca a versão base do 
+MCTS a jogar contra si próprio (durante 750 jogos ) que, a cada passo memoriza o 
+tabuleiro e a ação que escolheu registando os mesmos num ficheiro CSV . 
+
+--- PAGE 7 ---
+Dataset do Torneio 
+Visão Geral do Dataset 
+Para gerar o dataset do torneio entre os sete agentes do MCTS  a ideia geral é a mesma, 
+sendo a grande diferença o facto de cada par jogar 2 vezes  entre si, resultando num 
+dataset bastante rico em informação aprendendo várias estratégias de jogo. 
+
+--- PAGE 8 ---
+Dataset do Torneio Perturbado 
+Processo de Geração e Recuperação 
+Este processo pega no dataset do torneio anterior e realiza os seguintes passos: 
+● Lê linha a linha o ficheiro CSV e reconstrói o tabuleiro. 
+● Faz entre 2 a 6 jogadas aleatórias e descarta estados terminais. 
+● Três melhores agentes MCTS definem a jogada de recuperação após o baralhamento. 
+● Apaga as colunas desnecessárias para não confundir o ID3 
+
+--- PAGE 9 ---
+Algoritmo ID3: Íris 
+Contexto e Processamento 
+O dataset íris serviu como teste para a lógica matemática do ID3  para ser possível 
+continuar com o treino do Popout. 
+Como este dataset tem dados contínuos, utilizou-se a ferramenta qcut  da biblioteca 
+Pandas  para organizar esses dados em secções, tornando-os compatíveis com o ID3. 
+
+--- PAGE 10 ---
+Algoritmo ID3: Popout 
+Implementação e T estes 
+Para o treino dos datasets do Popout  usamos a implementação pura do ID3  programando 
+a Entropia  e o Ganho de informação. 
+
+--- PAGE 11 ---
+Algoritmo ID3: Popout Torneio 
+Ajustes no Treino do Dataset 
+• Exclusão de colunas auxiliares  para simplificar a tomada de decisão do ID3. 
+• Cálculo da entropia inicial  pelas jogadas e iteração por casa do tabuleiro (maior Ganho 
+de Informação = Raiz). 
+• Divisão em 3 sub-árvores  baseadas no estado do atributo: "Vazio" , "X" ou "O" . 
+• Processo recursivo  para cada sub-árvore, calculando o Ganho de Informação na 
+descida. 
+
+--- PAGE 12 ---
+Algoritmo ID3: Popout Torneio Perturbado 
+Treino do Dataset Perturbado 
+•Seleção do Agente Alvo: Determinamos o agente alvo para fundamentar as escolhas da 
+árvore. 
+•Divisão de Dados: Separação entre dados de treino e validação (essenciais para a poda). 
+•Hiperparâmetros: Definição de profundidade máxima e ganho mínimo de informação. 
+•Validação Pós-Poda: O script testa a árvore modificada contra o conjunto de validação. 
+
+--- PAGE 13 ---
+Resultados Torneio ID3 
+T orneio Avançado 16
+T orneio 10K P 15
+ID3 Base 12
+T orneio 10K 12
+T orneio Base 6
+
+--- PAGE 14 ---
+Interface 
+A interface é uma das partes mais importantes do jogo. 
+No arranque o script carrega o motor do jogo, a IA de pesquisa em tempo real MCTS e a árvore 
+de decisão treinada. 
+Game loop: 
+● Desenha o estado atual do tabuleiro no terminal 
+● Chama as funções de verificação de vencedor ou se é possível declarar um empate 
+● Se for esse o caso, pede o input ao jogador humano 
+● Aplica a jogada com uma função própria para esse efeito 
+
+--- PAGE 15 ---
+Interface Cont. 
+Tratamento do input: 
+A função get_human_move()  divide a string (ex: drop / 3, verifica a validade do número e cruza com a 
+função legal_moves() .
+MCTS vs ID3 
+● MCTS  Instanciado a cada jogada, analisando o estado ao vivo e simulando em tempo real. 
+● ID3  Converte o tabuleiro para dicionário e processa via função classificar() .
+● Fallback:  Se a árvore encontrar uma situação não treinada, executa o primeiro movimento legal. 
+
+--- PAGE 16 ---
+Conclusão 
+Com este projeto conseguimos concluir que uma boa exploração dos 
+algoritmos de implementação e treino de uma árvore de decisão é imperativa 
+para a descoberta do melhor agente possível. 
+Com esta diversidade de algoritmos e a exploração dos mesmos ficámos com 
+um conhecimento mais aprofundado dos métodos necessários para criar uma 
+IA capaz de combater um oponente quer seja ele artificial ou humano. 
