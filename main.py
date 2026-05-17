@@ -14,7 +14,7 @@ ID3_TREE_OPTIONS = [
     ("tour adv", "arvore_tour_adv.json"),
     ("tour craz 1", "arvore_tour_craz_1.json"),
     ("tour craz 2", "arvore_tour_craz_2.json"),
-    ("perturbed craz", "arvore_tour_craz_1_perturbed.json")
+    ("perturbed craz", "arvore_tour_craz_2_perturbed.json")
 ]
 
 
